@@ -7,8 +7,8 @@ import RouterCustom from './router';
 import './style/style.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log(React.version);
-console.log(ReactDOM.version);
+// console.log(React.version);
+// console.log(ReactDOM.version);
 root.render(
   <React.StrictMode>
     <Router>
