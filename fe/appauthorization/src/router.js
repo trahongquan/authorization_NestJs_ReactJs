@@ -1,8 +1,9 @@
-import { ProfilePage } from 'pages/user/profile';
+import { ProfilePage } from 'pages/user/profile/profile';
+import { RegisterPage } from 'pages/user/register/register';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from "./pages/user/homePage/index";
-import LoginPage from "./pages/user/login/index";
-import MasterLayout from './pages/user/theme/masterLayout/index';
+import HomePage from "./pages/user/homePage/homePage";
+import LoginPage from "./pages/user/login/login";
+import MasterLayout from './pages/user/theme/masterLayout/masterLayout';
 import { ROUTERS } from "./ultils/router";
 
 const renderUserRouter = () => {
@@ -18,6 +19,10 @@ const renderUserRouter = () => {
         {
             path: ROUTERS.USER.PROFILE,
             component: <ProfilePage/>
+        },
+        {
+            path: ROUTERS.USER.REGISTER,
+            component: <RegisterPage/>
         }
     ]
     return (

@@ -26,7 +26,7 @@ export class UserService {
       email: userDto.email,
     });
     if (userInDb) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Email đã tồn tại', HttpStatus.BAD_REQUEST);
     }
     return await this.userRepository.create(userDto);
   }

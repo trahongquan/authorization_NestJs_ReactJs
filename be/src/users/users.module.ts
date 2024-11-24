@@ -6,12 +6,10 @@ import { UserSchema } from './user.model';
 import { UserRepository } from './user.repository';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import * as process from 'node:process';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from '../jwt/auth.controller';
 import { AuthService } from '../jwt/auth.service';
 import { JwtStrategy } from '../jwt/jwt.strategy';
-// import { AuthModule } from '../jwt/auth.module';
 
 @Module({
   imports: [

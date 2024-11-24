@@ -3,7 +3,7 @@ import Textfield from "@atlaskit/textfield";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaHandPointRight } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { memo } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -77,7 +77,8 @@ export const LoginPage = () => {
                         <span className="mx-1">Nếu Bạn chưa có tài khoản? </span>
                         <FaHandPointRight />
                     </div>
-                    <Link to={""} className="text-primary mx-2">Đăng ký ngay </Link>
+                    <button style={{cursor: 'pointer'}} onClick={() => {navigate("/register")}}
+                    className="btn btn-tranperent text-primary mx-2">Đăng ký ngay </button>
                 </div>
             </div>
         </div>

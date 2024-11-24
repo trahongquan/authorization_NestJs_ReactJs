@@ -11,40 +11,35 @@ export const ProfilePage = () => {
     const navigate = useNavigate();
     const accessToken = localStorage.getItem('accessToken');
 
-    const Profilehandle = () => {
-        
-        if (accessToken) {
-            axios.get(`http://localhost:3333/auth/profile`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-            .then(response => {
-                if (!response.data) {
-                    navigate("/");
-                    toast.error("Không tìm thấy thông tin người dùng");
-                } else {
-                    setUser(response.data);
-                    // console.log(response.data)
-                    // console.log(user)
-                }
-            })
-            .catch(error => {
-                navigate("/login");
-                toast.error("Lỗi tải trang cá nhân")
-                console.error('Error:', error);
-            });
-        }
-    }
+    
     
     useEffect(() => {
         if (!accessToken) {
             navigate("/");
             toast.error("Bạn cần đăng nhập trước");
         } else {
-            Profilehandle();
+            if (accessToken) {
+                axios.get(`http://localhost:3333/auth/profile`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                })
+                .then(response => {
+                    if (!response.data) {
+                        navigate("/");
+                        toast.error("Không tìm thấy thông tin người dùng");
+                    } else {
+                        setUser(response.data);
+                    }
+                })
+                .catch(error => {
+                    navigate("/login");
+                    toast.error("Lỗi tải trang cá nhân")
+                    console.error('Error:', error);
+                });
+            }
         }
-    }, [accessToken]);
+    }, [accessToken, navigate]);
 
     useEffect(() => {
         if (user) {
