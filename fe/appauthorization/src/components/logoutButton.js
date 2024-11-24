@@ -7,10 +7,7 @@ const LogoutButton = () => {
             const response = await axios.post('http://localhost:3333/auth/logout');
 
             if (response.data) {
-                // Xóa accessToken khỏi localStorage hoặc nơi lưu trữ khác
                 localStorage.removeItem('accessToken');
-                
-                // Chuyển hướng người dùng đến trang đăng nhập
                 window.location.href = '/login';
                 console.log('Đã response.ok');
             }
@@ -22,7 +19,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <button onClick={handleLogout}>Logout</button>
+        <button className='btn btn-logout p-1' onClick={handleLogout}>Đăng xuất</button>
     );
 };
 

@@ -18,3 +18,7 @@ html, body {
     // background: map.get($theme-colors,  "main");
     margin: auto;
 }
+
+a {
+    all: unset;
+}

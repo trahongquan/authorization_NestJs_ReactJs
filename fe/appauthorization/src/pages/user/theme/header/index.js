@@ -1,19 +1,22 @@
 import axios from 'axios';
+import LogoutButton from 'components/logoutButton';
 import { memo, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaInstagram } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { SiFacebook } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import LogoutButton from 'components/logoutButton';
 import './style.scss';
 
 
 
 export const Header = () => {
-    const [toValue, setToValue] = useState("/login")
+    // const [toValue, setToValue] = useState("/login")
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
@@ -24,58 +27,61 @@ export const Header = () => {
           })
           .then(response => {
             // setUser(response.data);
-            // document.getElementById("text_lable").innerText = "Profile";
-            document.getElementById("btn_login").style.display = "none";
-            document.getElementById("btn_logout").style.display = "block";
-            setToValue("/profile");
+            setIsLoggedIn(true);
+            // setToValue("/profile");
             toast.success('Đăng nhập thành công!')
             console.log("Chạy lần 1");
             
           })
           .catch(error => {
+            setIsLoggedIn(false);
             console.error('Error:', error);
-            // setErrorMessage('Có lỗi khi tải trang cá nhân!');
           });
         //   navigate('/auth/profile')
+        } else {
+            setIsLoggedIn(false)
         }
       }, []);
+
     return(
         <header className='row'>
             <div>
                 <Toaster
-                position="top-center"
+                position="bottom-right"
                 reverseOrder={false}
                 />
             </div>
             <div className='row header-top' style={{padding: "1rem"}}>
-                <div className='col-6 d-flex justify-content-center'>
+                <div className='col-6 d-flex justify-content-center align-items-center'>
                     <span>
                         <MdOutlineMailOutline /> CBM86@email.com
                     </span>
                 </div>
                 <div className='col-6 header-top-right'>
-                    <ul className='d-flex row align-content-center' style={{margin: 'unset'}}>
-                        <li className='col-2'>
+                    <ul className='d-inline-flex justify-items-center' style={{margin: 'unset'}}>
+                        <li className='col-2 btn'>
                             <Link to={""}>
                                 <SiFacebook />
                             </Link>
                         </li>
-                        <li className='col-2'>
+                        <li className='col-2 btn '>
                             <Link to={""}>
                                 <FaInstagram />
                             </Link>
                         </li>
-                        <li className='col-2'>
-                            <Link to={""}>
+                        <li className='col-2 d-inline-flex'>
+                            <button type='button' className='btn btn-transparent mb-2' onClick={() => {navigate("/profile")}}>
                                 <IoPersonOutline />
-                            </Link>
+                            </button>
                         </li>
-                        <li className='col-6' id="btn_login" style={{cursor: "pointer"}}>
-                            <Link to={toValue} style={{"textDecoration": "none"}}>
-                                <span id="text_lable">Đăng nhập</span>
-                            </Link>
+                        <li className='col-6 btn' id="btn_login" 
+                        style={{cursor: "pointer", display : isLoggedIn ? 'none' : 'block'}}>
+                            {/* <Link to={toValue} style={{"textDecoration": "none"}}>
+                            </Link> */}
+                            <button className='btn bnt-login p-1 text-white' onClick={() => window.location.href="/login"}> Đăng nhập </button>
                         </li>
-                        <li className='col-6' id="btn_logout" style={{cursor: "pointer"}}>
+                        <li className='col-6 btn' id="btn_logout" 
+                        style={{cursor: "pointer", display : isLoggedIn ? 'block' : 'none'}}>
                             <LogoutButton/>
                         </li>
                     </ul>
@@ -83,21 +89,31 @@ export const Header = () => {
             </div>
             <div className='row header-middle'>
                 <div className='col-3 text-center'>
-                    <strong> Hệ Thống CBM </strong>
+                    <Link to={"/"}>
+                        <strong> Hệ Thống CBM </strong>
+                    </Link>
                 </div>
                 <div className='col-6 row text-center'>
                 <div className="col-4">
-                    <span> Trang chủ </span>
+                    <Link to={"/"} >
+                        <span> Trang chủ </span>
+                    </Link>
                 </div>
                 <div className="col-4">
-                    <span> Chức năng hệ thống </span>
+                    <Link to={"/"} >
+                        <span> Chức năng hệ thống </span>
+                    </Link>
                 </div>
                 <div className="col-4">
-                    <span> Dùng thử </span>
+                    <Link to={"/"} >
+                        <span> Dùng thử </span>
+                    </Link>
                 </div>
                 </div>
                 <div className='col-3 text-center'>
-                    <span> Về chúng tôi </span>
+                    <Link to={"/"} >
+                        <span> Về chúng tôi </span>
+                    </Link>
                 </div>
             </div>
         </header>

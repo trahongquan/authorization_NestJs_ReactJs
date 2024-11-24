@@ -1,34 +1,52 @@
 // import Button from "@atlaskit/button";
 import Textfield from "@atlaskit/textfield";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHandPointRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import { memo } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate()
+
+    const accessToken = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        if (accessToken) {
+            navigate("/");
+        } else {
+            toast.error('Bạn cần đăng nhập!')
+        }
+    }, [accessToken, navigate]);
+
     const  HanldeLogin = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:3333/auth/login',  { email , password });
             if(response.data.accessToken){
                 localStorage.setItem('accessToken', response.data.accessToken);
-                navigate('/')
+                navigate("/")
+                window.location.reload()
             }
         } catch (error){
             console.error('Error', error);
             setErrorMessage('Có lỗi khi đăng nhập!');
+            toast.error('Có lỗi khi đăng nhập!')
         }
     }
 
 
     return (
         <div className="d-flex flex-column justify-content-center h-100">
+                <Toaster
+                position="bottom-right"
+                reverseOrder={false}
+                />
             <div>
                 <h1 className="text-center m-2">Đăng nhập</h1>
             </div>

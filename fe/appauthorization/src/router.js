@@ -1,3 +1,4 @@
+import { ProfilePage } from 'pages/user/profile';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from "./pages/user/homePage/index";
 import LoginPage from "./pages/user/login/index";
@@ -13,6 +14,10 @@ const renderUserRouter = () => {
         {
             path: ROUTERS.USER.LOGIN,
             component: <LoginPage/>
+        },
+        {
+            path: ROUTERS.USER.PROFILE,
+            component: <ProfilePage/>
         }
     ]
     return (

@@ -32,13 +32,14 @@ export class AuthController {
   async logout(@Req() req, @Res() res) {
     return res.status(200).send('Logged out successfully');
   }
-
+  i = 0;
   @UseGuards(
     AuthGuard(),
   ) /** Decorator AuthGuard dùng để tự động check tới jwt.strategy */
   @Get('profile')
   async getProfile(@Req() req: any) {
     console.log(req.user);
+    console.log(this.i++);
     return req.user;
   }
 }

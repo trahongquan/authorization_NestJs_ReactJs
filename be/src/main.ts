@@ -25,7 +25,7 @@ async function bootstrap(): Promise<void> {
     const PORT = 3333;
     await app.listen(PORT, () => {
       logger.log(`App started on port ${PORT}`);
-      // logger.log('Connected to MongoDB database successfully');
+      logger.log('Connected to MongoDB database successfully');
     });
   } catch (error) {
     logger.error(`Error starting the app: ${error.message}`);
