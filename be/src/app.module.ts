@@ -1,3 +1,4 @@
+require('dotenv').config(); //load file .env vào
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -9,9 +10,9 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     UserModule,
     JwtModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/test'),
+    // MongooseModule.forRoot('mongodb://localhost:27017/test'),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     ConfigModule.forRoot(),
-    // MongooseModule.forRoot(process.env.MONGODB_URL),
   ],
 })
 export class AppModule {}

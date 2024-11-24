@@ -11,7 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    // const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate()
 
     const accessToken = localStorage.getItem('accessToken');
@@ -34,9 +34,15 @@ export const LoginPage = () => {
                 window.location.reload()
             }
         } catch (error){
-            console.error('Error', error);
-            setErrorMessage('Có lỗi khi đăng nhập!');
-            toast.error('Có lỗi khi đăng nhập!')
+            console.error('Error', error.response.data.message);
+            const errorMessage = error.response.data.message;
+                if (!Array.isArray(errorMessage)) {
+                    toast.error(errorMessage);
+                } else {
+                    errorMessage.forEach(element => {
+                        toast.error(element);
+                    });
+                }
         }
     }
 
@@ -62,9 +68,9 @@ export const LoginPage = () => {
                     <Textfield placeholder="****" type="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
             </div>
-            <div>
+            {/* <div>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            </div>
+            </div> */}
             <div className="d-flex flex-column justify-content-center m-2">
                 <div className="d-inline-flex justify-content-center">
                     <button type="button" onClick={HanldeLogin}

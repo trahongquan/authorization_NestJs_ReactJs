@@ -36,11 +36,17 @@ export class UserService {
     });
     console.log(user);
     if (!user) {
-      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        'Không tìm thấy người dùng',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     const is_equal = bcrypt.compareSync(password, user.password);
     if (!is_equal) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        'Sai tài khoản hoặc mật khẩu người dùng',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     return user;
   }

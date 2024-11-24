@@ -1,3 +1,4 @@
+require('dotenv').config(); //load file .env vào
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
@@ -16,7 +17,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate({ email }) {
     const user = await this.authService.validateUser(email);
     if (!user) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        'Xác thực token không thành công',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     return user;
   }
