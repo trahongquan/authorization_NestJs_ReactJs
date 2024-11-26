@@ -21,10 +21,12 @@ export class AuthService {
   }
   async login(loginUserDto: LoginUserDto) {
     const user = await this.userService.findByLogin(loginUserDto);
+    const user_return = { ...user };
+    delete user_return.password;
     const token = this._createAccessToken(user);
     const token2 = this._createRefreshToken(user);
     return {
-      email: user.email,
+      ...user_return,
       ...token,
       ...token2,
     };

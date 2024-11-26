@@ -63,7 +63,7 @@ export class LoginUserDto {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     {
       message:
-        'Password must be at least 8 characters long and contain at least one uppercase, one lowercase, one number and one special character',
+        'Mật khẩu phải dài ít nhất 8 ký tự và chứa ít nhất một chữ hoa, một chữ thường, một số và một ký tự đặc biệt',
     },
   )
   @IsNotEmpty()
