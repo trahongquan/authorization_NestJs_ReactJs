@@ -1,13 +1,18 @@
 import { memo } from 'react';
+import { Toaster } from 'react-hot-toast';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
 export const MasterLayout = ({ children, ...props }) => {
     return (
-        <div className='d-flex flex-column vh-100 overflow-hidden' {...props}>
+        <div className='overflow-auto overflow-hidden' {...props}>
             <Header />
-            <div className='flex-grow-1 flex-column overflow-auto overflow-hidden' >
-            {/* <div style={{ flex: 1, overflow: 'auto', display: 'flex', flexDirection: 'column' }}></div> */}
+            <Toaster
+                position="bottom-right"
+                reverseOrder={false}
+                />
+            {/* <div className='flex-grow-1 flex-column overflow-auto overflow-hidden' > */}
+            <div >
                 {children}
             </div>
             <Footer />

@@ -3,6 +3,7 @@ import axios from "axios";
 import { memo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 // import { useNavigate } from "react-router-dom";
+import { API_ROOT } from "ultils/consatnts";
 import "./register.scss";
 
 export const RegisterPage = () => {
@@ -18,7 +19,7 @@ export const RegisterPage = () => {
 
     const handleRegistration = async () => {
         try {
-            const response = await axios.post('http://localhost:3333/auth/register', { email, username, password, role, phone});
+            const response = await axios.post(`${API_ROOT}/auth/register`, { email, username, password, role, phone});
             console.log(response.data)
 
             if (response.data.accessToken) {

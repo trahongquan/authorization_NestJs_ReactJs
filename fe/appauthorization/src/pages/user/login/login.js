@@ -1,12 +1,12 @@
 // import Button from "@atlaskit/button";
 import Textfield from "@atlaskit/textfield";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaHandPointRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-import { memo } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { API_ROOT } from "ultils/consatnts";
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -27,11 +27,19 @@ export const LoginPage = () => {
     const  HanldeLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3333/auth/login',  { email , password });
+            const response = await axios.post(`${API_ROOT}/auth/login`,  { email , password });
+            console.log(response.data)
             if(response.data.accessToken){
                 localStorage.setItem('accessToken', response.data.accessToken);
-                navigate("/")
-                window.location.reload()
+                const isAdmin = response.data._doc.role === "admin";
+                if(!isAdmin){
+                    navigate("/")
+                    window.location.reload()
+                }else {
+                    navigate("/admin/dashboard")
+                    window.location.reload()
+                    toast.success(`Chào mừng admin ${response.data._doc.username}!`)
+                }
             }
         } catch (error){
             console.error('Error', error.response.data.message);
@@ -49,22 +57,18 @@ export const LoginPage = () => {
 
     return (
         <div className="d-flex flex-column justify-content-center h-100">
-                <Toaster
-                position="bottom-right"
-                reverseOrder={false}
-                />
             <div>
                 <h1 className="text-center m-2">Đăng nhập</h1>
             </div>
-            <div className="row justify-content-center my-1">
-                <label className="col-form-label col-1">Email:</label>
-                <div className="col-4">
+            <div className="row justify-content-center my-1 mx-sm-5 mx-0">
+                <label className="col-form-label col-lg-1">Email:</label>
+                <div className="col-lg-3">
                     <Textfield placeholder="Abc@email.com" onChange={(e) => setEmail(e.target.value)}/>
                 </div>
             </div>
-            <div className="row justify-content-center my-1">
-                <label className="col-form-label col-1">Mật khẩu:</label>
-                <div className="col-4">
+            <div className="row justify-content-center my-1 mx-sm-5 mx-0">
+                <label className="col-form-label col-lg-1">Mật khẩu:</label>
+                <div className="col-lg-3">
                     <Textfield placeholder="****" type="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
             </div>
@@ -79,7 +83,7 @@ export const LoginPage = () => {
                     </button>
                 </div>
                 <div className="d-inline-flex justify-content-center align-items-center">
-                    <div className="d-flex justify-content-center align-items-center">
+                    <div className="d-none d-md-block d-flex justify-content-center align-items-center">
                         <span className="mx-1">Nếu Bạn chưa có tài khoản? </span>
                         <FaHandPointRight />
                     </div>

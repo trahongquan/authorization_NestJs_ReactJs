@@ -1,0 +1,59 @@
+@use "sass:map";
+@import "style/pages/_theme.scss";
+
+
+.side__bar{
+    background-image: linear-gradient(180deg, #2018c9, #616eb5);;
+    &>div>div>ul {
+        // background-color: map.get($main-colors, "main-3")
+        li{
+            a{
+                font-size: larger;
+                color: aliceblue;
+                transition: transform 0.3s ease, color 0.3s ease
+            }
+            a:not(.dropdown-item):hover{
+                transform: translateX(1rem); /* Dịch chuyển phần tử sang trái 10px khi hover */
+                color: map.get($theme-colors, "btn-yellow"); 
+            }
+        }
+    }
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+    &.open {
+        transform: translateX(-80%);
+    }
+    
+    .sidebar-toggle {
+        position: absolute;
+        top: 1.5rem;
+        left: 15.2rem;
+        cursor: pointer;
+        z-index: 999;
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: rgb(255, 255, 255);
+            margin: 4px 0;
+        }
+    }
+    .sidebar-toggle-open{
+        position: absolute;
+        top: 1000px;
+        left: 1000px;
+        cursor: pointer;
+        z-index: 999;
+    }
+    
+}
+
+.nav-plils {
+    li {
+        a{
+            font-size: x-large;
+            color: white;
+            // color: map.get($theme-colors, "normal-text");
+        }
+    }
+}
