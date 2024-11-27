@@ -1,5 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LogoutButton from 'components/logoutButton';
+import { CiSettings } from "react-icons/ci";
+import { FaUsersCog } from "react-icons/fa";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { TbFunction } from "react-icons/tb";
+
+
 import { memo, useState } from 'react';
 import { FaHome } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -7,19 +13,14 @@ import { Link } from 'react-router-dom';
 import './slidebar.scss';
 
 const Sidebar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
     return (
         <>
-            {/* <div className="sidebar-toggle-open" onClick={handleToggleSidebar}>
-                <div className="bar"></div>
-                <div className="bar"></div>
-                <div className="bar"></div>
-            </div> */}
-            <div className={`d-flex flex-column flex-shrink-0 p-3 w-auto vh-100 side__bar ${isSidebarOpen ? 'open' : ''}`}>
+            <div className={`d-flex flex-column flex-shrink-0 p-3 w-auto vh-100 side__bar ${isSidebarOpen ? 'open' : ''}`} >
                 <div className="sidebar-toggle" onClick={handleToggleSidebar}>
                     <div className="bar"></div>
                     <div className="bar"></div>
@@ -29,33 +30,6 @@ const Sidebar = () => {
                     <span className="fs-4 text-white">Trang quản trị</span>
                 </Link>
                 <hr />
-                {/* <ul className="nav nav-pills flex-column mb-auto">
-                    <li className="nav-item">
-                        <Link to="/admin/dashboard" className="nav-link ">
-                            Dashboard
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/dashboard" className="nav-link ">
-                            Sản phẩm
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/dashboard" className="nav-link ">
-                            Chức năng
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/dashboard" className="nav-link ">
-                            Quản lý tài khoản
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/dashboard" className="nav-link ">
-                            Cài đặt
-                        </Link>
-                    </li>
-                </ul> */}
                 <div className='row'>
                     <div className='col-9'>
                     <ul className="nav nav-pills flex-column mb-auto">
@@ -95,22 +69,22 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link to="/admin/dashboard" className="nav-link ">
-                            <FaHome />
+                            <MdOutlineProductionQuantityLimits />
                         </Link>
                     </li>
                     <li>
                         <Link to="/admin/dashboard" className="nav-link ">
-                            <FaHome />
+                            <TbFunction />
                         </Link>
                     </li>
                     <li>
                         <Link to="/admin/dashboard" className="nav-link ">
-                            <FaHome />
+                            <FaUsersCog />
                         </Link>
                     </li>
                     <li>
                         <Link to="/admin/dashboard" className="nav-link ">
-                            <FaHome />
+                            <CiSettings />
                         </Link>
                     </li>
                 </ul>

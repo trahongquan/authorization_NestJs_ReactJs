@@ -44,18 +44,18 @@ export const Dashboard = () => {
                         </div>
                     </div>
                     <div className='m-3 row justify-content-between px-4'>
-                        <div class="table">
-                            <div class="row">
-                                <div class="cell cell_1">Chủ đề</div>
-                                <div class="cell">Ngày tạo</div>
-                                <div class="cell">Người tạo</div>
-                                <div class="cell_3 row g-0">
-                                    <div class="cell_3_body">Thông tin</div>
-                                    <div class="cell_3_body">Tích cực</div>
-                                    <div class="cell_3_body">Tiêu cực</div>
+                        <div className="table">
+                            <div className="row">
+                                <div className="cell cell_1">Chủ đề</div>
+                                <div className="cell">Ngày tạo</div>
+                                <div className="cell">Người tạo</div>
+                                <div className="cell_3 row g-0">
+                                    <div className="cell_3_body">Thông tin</div>
+                                    <div className="cell_3_body">Tích cực</div>
+                                    <div className="cell_3_body">Tiêu cực</div>
                                 </div>
-                                <div class="cell">Thao tác</div>
-                                <div class="cell">So sánh</div>
+                                <div className="cell">Thao tác</div>
+                                <div className="cell">So sánh</div>
                             </div>
                             <Row number={10}></Row>
                             <div>
@@ -65,7 +65,7 @@ export const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <button class="fixed-button" onClick={() => {window.scrollTo({top: 0, behavior: 'smooth'});}}>
+            <button className="fixed-button" onClick={() => {window.scrollTo({top: 0, behavior: 'smooth'});}}>
                 <MdOutlineKeyboardDoubleArrowUp />
             </button>
         </>

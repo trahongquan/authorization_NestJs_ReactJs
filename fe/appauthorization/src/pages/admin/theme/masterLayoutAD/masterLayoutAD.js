@@ -9,8 +9,10 @@ export const MasterLayoutAD = ({ children, ...props }) => {
                 position="bottom-right"
                 reverseOrder={false}
                 />
-            <Sidebar />
-            <div className="flex-grow-1 d-flex flex-column bg-light w-auto vh-100 overflow-x-hidden overflow-y-scroll">
+            <div style={{transform: "translateX(-80%)", position: "absolute"}}>
+                <Sidebar />
+            </div>
+            <div className="flex-grow-1 d-flex flex-column bg-light w-auto vh-100 overflow-x-hidden overflow-y-scroll ms-5">
                 {children}
             </div>
         </div>

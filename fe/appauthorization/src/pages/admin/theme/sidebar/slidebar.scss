@@ -2,8 +2,12 @@
 @import "style/pages/_theme.scss";
 
 
+
 .side__bar{
+    position: relative;
     background-image: linear-gradient(180deg, #2018c9, #616eb5);;
+    transition: transform 0.3s ease;
+    transform: translateX(0%);
     &>div>div>ul {
         // background-color: map.get($main-colors, "main-3")
         li{
@@ -18,16 +22,14 @@
             }
         }
     }
-    transition: transform 0.3s ease;
-    transform: translateX(0);
     &.open {
-        transform: translateX(-80%);
+        transform: translateX(80%);
     }
     
     .sidebar-toggle {
         position: absolute;
         top: 1.5rem;
-        left: 15.2rem;
+        left: 15rem;
         cursor: pointer;
         z-index: 999;
 
@@ -37,13 +39,6 @@
             background-color: rgb(255, 255, 255);
             margin: 4px 0;
         }
-    }
-    .sidebar-toggle-open{
-        position: absolute;
-        top: 1000px;
-        left: 1000px;
-        cursor: pointer;
-        z-index: 999;
     }
     
 }
@@ -57,3 +52,7 @@
         }
     }
 }
+// a:not(.dropdown-item):hover{
+//     transform: translateX(1rem); /* Dịch chuyển phần tử sang trái 10px khi hover */
+//     color: map.get($theme-colors, "btn-yellow"); 
+// }
